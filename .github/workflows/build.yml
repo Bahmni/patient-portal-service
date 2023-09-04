@@ -1,0 +1,26 @@
+name: Build and Run Spring Boot
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    name: Build and Run Spring Boot
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Build Spring Boot Application
+        run: ./mvnw clean package
+
+      - name: Run Spring Boot Application
+        run: java -jar target/patient-portal-service-0.0.1-SNAPSHOT.jar
